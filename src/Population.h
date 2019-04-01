@@ -4,16 +4,22 @@
 #include <vector>
 #include "Preprocessing.h"
 
-class Chronosome {
+class Chromosome {
 public: 
-    Chronosome(int n, int * val);
-    ~Chronosome();
-    static Chronosome* PMX(Chronosome* c1, Chronosome* c2);
-    double evaluate(Matrix m);
+    Chromosome(int n, int * val);
+    Chromosome(int n, int * val, int * position);
+    ~Chromosome();
+    static Chromosome* PMX(Chromosome* c1, Chromosome* c2);
+    void inversion(int n1, int n2);
+    double evaluate(Matrix* m);
     double getEval();
+    int* getVal();
+    int* getPosition();
+    void print();
 protected:
     int n;
     int * val;
+    int * position;
     double eval;
 };
 
@@ -23,15 +29,22 @@ public:
     ~Population() {}
 
     void init(int n, int size);
-    void evaluation(Matrix m);
+    void evaluation();
     void selection();
     void crossover();
     void mutation();
 
     double getMean();
     double getStandardDeviation();
+
+    void print();
+    void printEval();
+    void printOptimum();
+    double getOptimumEval();
+    void getMatrixFromFile(string filename, int n);
 protected:
     int size;
     int n;
-    vector<Chronosome*> list;
-}
+    vector<Chromosome*> list;
+    Matrix* mat;
+};

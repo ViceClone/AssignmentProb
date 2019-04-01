@@ -14,4 +14,4 @@ public:
     Preprocessing();
     ~Preprocessing();
     static Matrix getMatrixFromFile(string filename);
-}
+};
