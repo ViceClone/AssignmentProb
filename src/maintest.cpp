@@ -11,9 +11,9 @@ int main() {
     Population * p = new Population();
     p->init(105,40);
     //p->print();
-    p->getMatrixFromFile("dataset1_formatted.csv",105);
+    p->getMatrixFromFile("dataset1_formatted.csv",105,cube);
     p->evaluation();
-        for (int i=0; i<300; i++) {
+        for (int i=0; i<500; i++) {
         p->crossover();
         p->evaluation();
         p->mutation();

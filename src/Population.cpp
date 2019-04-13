@@ -12,6 +12,11 @@
 #include <iterator>
 using namespace std;
 
+double cube(double x) {
+    x-=1;
+    return x*x*x;
+}
+
 bool compare(Chromosome * c1, Chromosome * c2) {
     return c1->getEval()<c2->getEval();
 }
@@ -93,6 +98,13 @@ void Chromosome::inversion(int n1, int n2) {
 void Chromosome::print() {
     for (int i = 0; i<n; i++) {
         cout << "  " << val[i];
+    }
+    cout << endl;
+}
+
+void Chromosome::printAssignment(Matrix* mat) {
+    for (int i = 0; i<n; i++) {
+        cout << "  " << mat->val[i][val[i]];
     }
     cout << endl;
 }
@@ -199,9 +211,10 @@ void Population::printEval() {
 
 void Population::printOptimum() {
     list[0]->print();
+    list[0]->printAssignment(mat);
 }
 
-void Population::getMatrixFromFile(string filename, int n) {
+void Population::getMatrixFromFile(string filename, int n, double (*f)(double)) {
     mat = (Matrix*)malloc(sizeof(Matrix));
     mat->n = n;
     mat->val = new double*[n];
@@ -222,6 +235,7 @@ void Population::getMatrixFromFile(string filename, int n) {
             if (!(iss >> mat->val[row][i])){
                 break;
             }
+            mat->val[row][i] = f(mat->val[row][i]);
         }
         row++;
     }

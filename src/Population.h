@@ -4,6 +4,8 @@
 #include <vector>
 #include "Preprocessing.h"
 
+double cube(double x);
+
 class Chromosome {
 public: 
     Chromosome(int n, int * val);
@@ -16,6 +18,7 @@ public:
     int* getVal();
     int* getPosition();
     void print();
+    void printAssignment(Matrix* m);
 protected:
     int n;
     int * val;
@@ -41,7 +44,7 @@ public:
     void printEval();
     void printOptimum();
     double getOptimumEval();
-    void getMatrixFromFile(string filename, int n);
+    void getMatrixFromFile(string filename, int n, double (*f)(double));
 protected:
     int size;
     int n;
